@@ -9,3 +9,6 @@ To use, simply clone, run `npm run build:main`, then `import { TDSequential } fr
 I changed a litte bit of the code to get the TDSTSell filled - hopefully this it correct.
 
 Thanks go out to [ourarash](https://github.com/ourarash) for his initial effort to implement this.
+
+## License
+[MIT](https://vjpr.mit-license.org/)
