@@ -61,7 +61,7 @@ export class TdSequential {
           if(resultObj.buySetupIndex === 1) {
             this._buySellZone = [item[2], item[3]];
           }
-          resultObj.TdStBuy = Math.max(item[2], this._tdsResult[i - 1].TdStBuy);
+          resultObj.tdstBuy = Math.max(item[2], this._tdsResult[i - 1].tdstBuy);
         } else if (
           resultObj.bullishFlip ||
           (this._tdsResult[i - 1].sellSetupIndex > 0 &&
@@ -73,9 +73,9 @@ export class TdSequential {
           if(resultObj.sellSetupIndex === 1) {
             this._buySellZone = [item[2], item[3]];
           }
-          resultObj.TdStSell = this._tdsResult[i - 1].TdStSell === 0 ? item[3] : Math.max(
+          resultObj.tdstSell = this._tdsResult[i - 1].tdstSell === 0 ? item[3] : Math.max(
             item[3],
-            this._tdsResult[i - 1].TdStSell
+            this._tdsResult[i - 1].tdstSell
           );
         }
 
@@ -140,8 +140,8 @@ export class TdSequential {
     if (
       // Sell setup appears
       (this._tdsResult[i - 1].sellSetup && resultObj.buySetup) ||
-      // Close below TdStSell
-      (this.resetCountdownOnTdSt && item[4] < resultObj.TdStSell)
+      // Close below tdstSell
+      (this.resetCountdownOnTdSt && item[4] < resultObj.tdstSell)
     ) {
       resultObj.sellCountdownIndex = 0;
       resultObj.countdownResetForTdSt = true;
@@ -193,7 +193,7 @@ export class TdSequential {
       // Sell setup appears
       (this._tdsResult[i - 1].buySetup && resultObj.sellSetup) ||
       // Close above TDSTBuy
-      (this.resetCountdownOnTdSt && item[4] > resultObj.TdStBuy)
+      (this.resetCountdownOnTdSt && item[4] > resultObj.tdstBuy)
     ) {
       resultObj.buyCountdownIndex = 0;
       resultObj.countdownResetForTdSt = true;
@@ -241,8 +241,8 @@ export class TdSequentialResult {
     this.buyCountdownIndex = other.buyCountdownIndex;
     this.sellSetup = other.sellSetup;
     this.buySetup = other.buySetup;
-    this.TdStBuy = other.TdStBuy;
-    this.TdStSell = other.TdStSell;
+    this.tdstBuy = other.tdstBuy;
+    this.tdstSell = other.tdstSell;
     this.sellSetupPerfection = other.sellSetupPerfection;
     this.buySetupPerfection = other.buySetupPerfection;
   }
@@ -261,8 +261,8 @@ export class TdSequentialResult {
   public bearishFlip = false; // Indicates a bearish flip happened
   public bullishFlip = false; // Indicates a bullish flip happened
 
-  public TdStBuy = 0; // highest high(usually the high of bar 1) of a buy setup
-  public TdStSell = 0; // the lowest low(usually the low of bar 1) of sell setup
+  public tdstBuy = 0; // highest high(usually the high of bar 1) of a buy setup
+  public tdstSell = 0; // the lowest low(usually the low of bar 1) of sell setup
   public countdownResetForTdSt = false; // Indicates the countdown got reset due to observing TDST
 }
 
